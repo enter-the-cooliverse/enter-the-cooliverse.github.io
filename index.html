@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter the Cooliverse</title>
+    <style>
+        .hidden {
+            display: none !important;
+        }
+
+        body {
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .padding {
+            flex-grow: 2;
+        }
+
+        #anim {
+            height: 100vh;
+        }
+
+        img {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div class="padding"></div>
+<div class="container">
+    <div class="padding"></div>
+    <img id="enter" alt="Enter The Cooliverse" src="assets/etc.png">
+    <div id="anim" class="hidden">
+        <img src="assets/cabin1.png" alt="frame 1">
+        <img src="assets/cabin2.png" alt="frame 2">
+        <img src="assets/cabin3.png" alt="frame 3">
+    </div>
+    <div class="padding"></div>
+</div>
+<div class="padding"></div>
+</body>
+<script>
+	function startAnim(framesParent, frameDuration = 17) {
+		const frames = framesParent.children;
+		const timeStart = Date.now();
+
+		function step() {
+			const elapsed = Date.now() - timeStart;
+			const displayedFrameIndex = Math.floor(elapsed / frameDuration) % frames.length;
+
+			for (let frameIndex = 0; frameIndex < frames.length; frameIndex++) {
+				const frame = frames[frameIndex];
+				if (frameIndex === displayedFrameIndex) {
+					frame.classList.remove('hidden');
+				} else {
+					frame.classList.add('hidden');
+				}
+			}
+
+			window.requestAnimationFrame(step);
+		}
+
+		window.requestAnimationFrame(step);
+	}
+
+	const enterButton = document.getElementById('enter');
+	enterButton.addEventListener('click', () => {
+		var audio = new Audio('/assets/organ-pub.mp3');
+		audio.loop = true;
+		audio.play();
+		enterButton.parentNode.removeChild(enterButton);
+		const animDiv = document.getElementById('anim');
+		animDiv.classList.remove('hidden');
+		startAnim(animDiv, 150);
+	});
+
+</script>
+</html>
