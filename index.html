@@ -31,8 +31,13 @@
             cursor: grab;
         }
 
-        img {
+        .frame {
+            pointer-events: none;
             height: 100vh;
+        }
+
+        img {
+            user-select: none;
         }
     </style>
 </head>
@@ -40,11 +45,11 @@
 <div class="padding"></div>
 <div class="container">
     <div class="padding"></div>
-    <img id="enter" alt="Enter The Cooliverse" src="assets/etc.png">
+    <img draggable="false" id="enter" alt="Enter The Cooliverse" src="assets/etc.png">
     <div id="anim" class="hidden">
-        <img src="assets/cabin1.png" alt="frame 1">
-        <img src="assets/cabin2.png" alt="frame 2">
-        <img src="assets/cabin3.png" alt="frame 3">
+        <img draggable="false" class="frame" src="assets/cabin1.png" alt="frame 1">
+        <img draggable="false" class="frame" src="assets/cabin2.png" alt="frame 2">
+        <img draggable="false" class="frame" src="assets/cabin3.png" alt="frame 3">
     </div>
     <div class="padding"></div>
 </div>
